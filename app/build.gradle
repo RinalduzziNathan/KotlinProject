@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 android {
     compileSdk 31
 
@@ -14,6 +16,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String","API_PUBLIC_KEY", localProperties.getProperty("API_PUBLIC_KEY").toString())
+        buildConfigField("String","API_PRIVATE_KEY", localProperties.getProperty("API_PRIVATE_KEY").toString())
     }
 
     buildTypes {
@@ -22,6 +26,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
