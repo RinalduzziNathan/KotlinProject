@@ -1,4 +1,4 @@
-package fr.iem.interceptor
+package com.example.androidkotlinproject.data.interceptor
 
 import com.example.androidkotlinproject.data.manager.HashMd5Manager
 import com.example.androidkotlinproject.data.manager.ResourceManager

@@ -2,7 +2,7 @@ package com.example.androidkotlinproject.data.manager
 import com.example.androidkotlinproject.BASE_URL
 import com.google.gson.Gson
 
-import fr.iem.interceptor.InterceptorMarvelAPI
+import com.example.androidkotlinproject.data.interceptor.InterceptorMarvelAPI
 import fr.iem.model.MarvelCharacter
 import com.example.androidkotlinproject.data.service.MarvelAPI
 
