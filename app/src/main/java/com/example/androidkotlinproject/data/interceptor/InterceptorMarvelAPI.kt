@@ -1,5 +1,6 @@
 package com.example.androidkotlinproject.data.interceptor
 
+import com.example.androidkotlinproject.BuildConfig
 import com.example.androidkotlinproject.data.manager.HashMd5Manager
 import com.example.androidkotlinproject.data.manager.ResourceManager
 
@@ -12,10 +13,10 @@ class InterceptorMarvelAPI : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
 
         val resourceManager = ResourceManager()
-        val marvelApiKeyProperties = resourceManager.readMarvelProperties()
+       // val marvelApiKeyProperties = resourceManager.readMarvelProperties()
 
-        val publicKey = marvelApiKeyProperties.getProperty("publicKey")
-        val privateKey = marvelApiKeyProperties.getProperty("privateKey")
+        val publicKey = BuildConfig.API_PUBLIC_KEY
+        val privateKey = BuildConfig.API_PRIVATE_KEY
 
         val timestamp = Date().time
 

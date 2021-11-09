@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.androidkotlinproject.R
 import com.example.androidkotlinproject.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -19,6 +19,7 @@ class HomeFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,11 +33,23 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+        homeViewModel.name.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        val textHome : TextView = binding.textHome2
+        homeViewModel.description.observe(viewLifecycleOwner, Observer {
+            textHome.text = it
+        })
+        val btn : Button = binding.push
+        btn.setOnClickListener {
+            homeViewModel.deleteText()
+        }
         return root
+
+
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

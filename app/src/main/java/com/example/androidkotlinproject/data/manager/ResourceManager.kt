@@ -8,7 +8,7 @@ class ResourceManager {
 
     fun readMarvelProperties(): Properties {
         val properties = Properties()
-        properties.load(FileInputStream(File("src/main/resources/properties/marvel_api_key.properties")))
+    //    properties.load(FileInputStream(File("src/main/resources/properties/marvel_api_key.properties")))
         return properties
     }
 }
