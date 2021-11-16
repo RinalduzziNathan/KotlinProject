@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
 
         val textView: TextView = binding.textHome
         homeViewModel.name.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+            textView.text = homeViewModel.getName()
         })
 
         val textHome : TextView = binding.textHome2
@@ -44,6 +44,7 @@ class HomeFragment : Fragment() {
         val btn : Button = binding.push
         btn.setOnClickListener {
             homeViewModel.deleteText()
+            textView.text = textView.text.toString()+ " pushed "
         }
         return root
 
