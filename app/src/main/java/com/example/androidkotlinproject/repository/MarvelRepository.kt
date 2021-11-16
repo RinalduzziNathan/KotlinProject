@@ -10,18 +10,13 @@ import retrofit2.Response
 
 object MarvelRepository {
 
-    suspend fun fetchMarvelCharactersCoroutine(): MutableList<MarvelCharacter> {
-
-        val list = mutableListOf<MarvelCharacter>()
+    suspend fun fetchMarvelCharactersCoroutine(): MarvelResponse {
 
         val apiManager = APIManager()
+
         var result = apiManager.marvelAPICharacters()
 
-        result.data.results?.let {
-            list.addAll(it)
-        }
-
-        return list
+        return result
     }
 
 }
