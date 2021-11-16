@@ -9,9 +9,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidkotlinproject.R
 import com.squareup.picasso.Picasso
+import fr.iem.model.MarvelCharacter
 
-class CustomAdapter(private val dataSet: MarvelResponse) :
+class CustomAdapter (private val dataSet: MarvelResponse, var clickCallBack : (marvelCharacter : MarvelCharacter) -> Unit):
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+
 
     /**
      * Provide a reference to the type of views that you are using
@@ -22,7 +24,7 @@ class CustomAdapter(private val dataSet: MarvelResponse) :
         val img : ImageView = view.findViewById(R.id.image)
         val textViewStatus: TextView = view.findViewById(R.id.tvCharacterstatus)
         init {
-            // Define click listener for the ViewHolder's View.
+
         }
     }
 
@@ -38,12 +40,14 @@ class CustomAdapter(private val dataSet: MarvelResponse) :
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
-        // Get element from your dataset at this position and replace the
-        // contents of the view with that element
+
+        viewHolder.itemView.setOnClickListener {
+           clickCallBack(dataSet.data.results[position])
+        }
         viewHolder.textViewName.text = dataSet.data.results[position].name
         viewHolder.textViewStatus.text = dataSet.data.results[position].modified
-
         var path : String = dataSet.data.results[position].thumbnail.path
+
         if (dataSet != null) {
             Picasso.get().load(path.replace("http","https")+"."+dataSet.data.results[position].thumbnail.extension).into(viewHolder.img)
         }
