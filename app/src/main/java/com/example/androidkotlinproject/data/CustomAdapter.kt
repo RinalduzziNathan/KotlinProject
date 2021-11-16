@@ -20,7 +20,7 @@ class CustomAdapter(private val dataSet: MarvelResponse) :
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.tvCharacterstatus)
+        val textView: TextView = view.findViewById(R.id.tvCharactername)
         val img : ImageView = view.findViewById(R.id.image)
 
         init {
