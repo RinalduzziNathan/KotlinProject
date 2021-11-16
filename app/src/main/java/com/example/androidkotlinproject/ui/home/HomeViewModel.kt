@@ -1,25 +1,20 @@
 package com.example.androidkotlinproject.ui.home
 
-import MarvelResponse
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.androidkotlinproject.BuildConfig
 import com.example.androidkotlinproject.data.manager.APIManager
-import com.google.gson.Gson
-import fr.iem.model.MarvelCharacter
 import kotlinx.coroutines.launch
-import java.io.File
 
 class HomeViewModel : ViewModel() {
 
 
    var name = liveData {
         val apiManager = APIManager()
-       emit(apiManager.useMarvelAPI().name)
+       emit(apiManager.marvelAPIByID().name)
     }
     var description = liveData {
         val apiManager = APIManager()
-        emit(apiManager.useMarvelAPI().description)
+        emit(apiManager.marvelAPIByID().description)
     }
 
     fun getName() : String{
@@ -27,7 +22,7 @@ class HomeViewModel : ViewModel() {
 
         viewModelScope.launch {
             val apiManager = APIManager()
-             name = apiManager.useMarvelAPI().name
+             name = apiManager.marvelAPIByID().name
         }
         return name
     }

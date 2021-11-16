@@ -32,7 +32,7 @@ class DashboardFragment : Fragment() {
         val root: View = binding.root
 
 
-        dashboardViewModel.recyclerLiveData.observe(viewLifecycleOwner, Observer {
+        dashboardViewModel.recyclerLiveData().observe(viewLifecycleOwner, Observer {
             var recyclerView = binding.rvcharacters
             recyclerView.layoutManager = LinearLayoutManager(activity?.applicationContext)
             val adapter = CustomAdapter(it)

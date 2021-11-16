@@ -1,19 +1,29 @@
 package com.example.androidkotlinproject.ui.dashboard
 
-import androidx.lifecycle.LiveData
+import MarvelResponse
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import com.example.androidkotlinproject.data.manager.APIManager
+import androidx.lifecycle.viewModelScope
+import com.example.androidkotlinproject.repository.MarvelRepository
+import fr.iem.model.MarvelCharacter
+import kotlinx.coroutines.launch
 
 class DashboardViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is dashboard Fragment"
     }
-    val recyclerLiveData = liveData {
 
-        val apiManager = APIManager()
-        emit(apiManager.useMarvelAPIResponse())
+
+    fun recyclerLiveData() : MutableLiveData<MarvelCharacter> {
+
+
+        val data = MutableLiveData<MarvelCharacter>()
+
+        viewModelScope.launch {
+            data.postValue(MarvelRepository.fetchMarvelCharactersCoroutine()[0])
+        }
+
+        return data
     }
 }

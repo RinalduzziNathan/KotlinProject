@@ -15,7 +15,7 @@ import java.lang.IllegalStateException
 
 
 class APIManager {
-    suspend fun useMarvelAPI() : MarvelCharacter {
+    suspend fun marvelAPIByID() : MarvelCharacter {
 
         //create an instance of our interceptor
         val interceptor = InterceptorMarvelAPI()
@@ -42,7 +42,7 @@ class APIManager {
 
         return ironMan[0]
     }
-    suspend fun useMarvelAPIResponse() : MarvelResponse {
+    suspend fun marvelAPICharacters() : MarvelResponse {
 
         //create an instance of our interceptor
         val interceptor = InterceptorMarvelAPI()

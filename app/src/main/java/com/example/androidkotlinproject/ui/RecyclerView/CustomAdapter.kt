@@ -9,8 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidkotlinproject.R
 import com.squareup.picasso.Picasso
+import fr.iem.model.MarvelCharacter
 
-class CustomAdapter(private val dataSet: MarvelResponse) :
+class CustomAdapter(private val dataSet: MarvelCharacter) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     /**
@@ -40,15 +41,15 @@ class CustomAdapter(private val dataSet: MarvelResponse) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textViewName.text = dataSet.data.results[position].name
-        viewHolder.textViewStatus.text = dataSet.data.results[position].modified
+        viewHolder.textViewName.text = dataSet.name
+        viewHolder.textViewStatus.text = dataSet.modified
 
-        var path : String = dataSet.data.results[position].thumbnail.path
+        var path : String = dataSet.thumbnail.path
         if (dataSet != null) {
-            Picasso.get().load(path.replace("http","https")+"."+dataSet.data.results[position].thumbnail.extension).into(viewHolder.img)
+            Picasso.get().load(path.replace("http","https")+"."+dataSet.thumbnail.extension).into(viewHolder.img)
         }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = dataSet.data.results.size
+    override fun getItemCount() = 20
 }
