@@ -12,4 +12,7 @@ interface MarvelAPI  {
         @Path("character_id") characterID : Int,
     ): Response<MarvelResponse>
 
+    @GET("/v1/public/characters")
+    suspend fun getCharacters(
+    ): Response<MarvelResponse>
 }

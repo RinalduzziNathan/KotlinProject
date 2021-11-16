@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.androidkotlinproject.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.android3.CustomAdapter
 import com.example.androidkotlinproject.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -31,10 +31,16 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+
+        dashboardViewModel.recyclerLiveData.observe(viewLifecycleOwner, Observer {
+            var recyclerView = binding.rvcharacters
+
+            recyclerView.layoutManager = LinearLayoutManager(activity?.applicationContext)
+            val adapter = CustomAdapter(it)
+            recyclerView.adapter = adapter
         })
+
+
         return root
     }
 
