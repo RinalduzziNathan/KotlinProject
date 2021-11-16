@@ -34,7 +34,6 @@ class DashboardFragment : Fragment() {
 
         dashboardViewModel.recyclerLiveData.observe(viewLifecycleOwner, Observer {
             var recyclerView = binding.rvcharacters
-
             recyclerView.layoutManager = LinearLayoutManager(activity?.applicationContext)
             val adapter = CustomAdapter(it)
             recyclerView.adapter = adapter

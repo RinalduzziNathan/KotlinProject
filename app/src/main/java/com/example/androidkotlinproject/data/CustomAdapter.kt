@@ -1,6 +1,7 @@
 package com.example.android3
 
 import MarvelResponse
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,10 +43,10 @@ class CustomAdapter(private val dataSet: MarvelResponse) :
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.textView.text = dataSet.data.results[position].name
-            //viewHolder.img
-        //if (dataSet != null) {
-          //  Picasso.get().load(dataSet.get(position).thumbnail.path+dataSet.get(position).thumbnail.extension).into(viewHolder.img)
-        //}
+        var path : String = dataSet.data.results[position].thumbnail.path
+        if (dataSet != null) {
+            Picasso.get().load(path.replace("http","https")+"."+dataSet.data.results[position].thumbnail.extension).into(viewHolder.img)
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
