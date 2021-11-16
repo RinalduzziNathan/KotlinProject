@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.android3.CustomAdapter
+import com.example.androidkotlinproject.ui.RecyclerView.CustomAdapter
 import com.example.androidkotlinproject.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {

@@ -1,7 +1,6 @@
-package com.example.android3
+package com.example.androidkotlinproject.ui.RecyclerView
 
 import MarvelResponse
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidkotlinproject.R
 import com.squareup.picasso.Picasso
-import fr.iem.model.MarvelCharacter
 
 class CustomAdapter(private val dataSet: MarvelResponse) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
@@ -20,9 +18,9 @@ class CustomAdapter(private val dataSet: MarvelResponse) :
      * (custom ViewHolder).
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.tvCharactername)
+        val textViewName: TextView = view.findViewById(R.id.tvCharactername)
         val img : ImageView = view.findViewById(R.id.image)
-
+        val textViewStatus: TextView = view.findViewById(R.id.tvCharacterstatus)
         init {
             // Define click listener for the ViewHolder's View.
         }
@@ -42,7 +40,9 @@ class CustomAdapter(private val dataSet: MarvelResponse) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = dataSet.data.results[position].name
+        viewHolder.textViewName.text = dataSet.data.results[position].name
+        viewHolder.textViewStatus.text = dataSet.data.results[position].modified
+
         var path : String = dataSet.data.results[position].thumbnail.path
         if (dataSet != null) {
             Picasso.get().load(path.replace("http","https")+"."+dataSet.data.results[position].thumbnail.extension).into(viewHolder.img)

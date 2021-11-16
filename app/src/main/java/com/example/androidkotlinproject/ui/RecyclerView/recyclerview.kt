@@ -1,8 +1,6 @@
-package com.example.androidkotlinproject.data
+package com.example.androidkotlinproject.ui.RecyclerView
 
-import MarvelResponse
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +37,7 @@ class MyRecyclerViewAdapter internal constructor(
         val status = mData2[position]
         val imgstr = mDataImageString[position]
         holder.myTextView.text = name
-       // holder.myTextView2.text = status
+        holder.myTextView2.text = status
         Picasso.get().load(imgstr).into(holder.myImgView)
     }
 
@@ -52,7 +50,7 @@ class MyRecyclerViewAdapter internal constructor(
     inner class ViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
         var myTextView: TextView
-       // var myTextView2: TextView
+        var myTextView2: TextView
         var myImgView: ImageView
         override fun onClick(view: View) {
             if (mClickListener != null) mClickListener!!.onItemClick(view, adapterPosition)
@@ -60,7 +58,7 @@ class MyRecyclerViewAdapter internal constructor(
 
         init {
             myTextView = itemView.findViewById(R.id.tvCharactername)
-            //myTextView2 = itemView.findViewById(R.id.tvCharacterstatus)
+            myTextView2 = itemView.findViewById(R.id.tvCharacterstatus)
             myImgView = itemView.findViewById(R.id.image)
             itemView.setOnClickListener(this)
         }
