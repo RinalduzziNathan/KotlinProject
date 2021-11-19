@@ -10,11 +10,11 @@ class HomeViewModel : ViewModel() {
 
    var name = liveData {
         val apiManager = APIManager()
-       emit(apiManager.marvelAPIByID().name)
+       emit(apiManager.marvelAPIByID(1017100).name)
     }
     var description = liveData {
         val apiManager = APIManager()
-        emit(apiManager.marvelAPIByID().description)
+        emit(apiManager.marvelAPIByID(1017100).description)
     }
 
     fun getName() : String{
@@ -22,7 +22,7 @@ class HomeViewModel : ViewModel() {
 
         viewModelScope.launch {
             val apiManager = APIManager()
-             name = apiManager.marvelAPIByID().name
+             name = apiManager.marvelAPIByID(1017100).name
         }
         return name
     }

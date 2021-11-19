@@ -15,7 +15,7 @@ import java.lang.IllegalStateException
 
 
 class APIManager {
-    suspend fun marvelAPIByID() : MarvelCharacter {
+    suspend fun marvelAPIByID(id : Int) : MarvelCharacter {
 
         //create an instance of our interceptor
         val interceptor = InterceptorMarvelAPI()
@@ -32,7 +32,7 @@ class APIManager {
             .create(MarvelAPI::class.java)
 
         val response = retrofit.getCharacterByID(
-            characterID = 1009368,
+            characterID = id,
         )
 
         val ironMan = if(response.isSuccessful){

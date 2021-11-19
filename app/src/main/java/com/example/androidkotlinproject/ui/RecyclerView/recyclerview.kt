@@ -38,7 +38,6 @@ class MyRecyclerViewAdapter internal constructor(
         val imgstr = mDataImageString[position]
         holder.myTextView.text = name
         holder.myTextView2.text = status
-        Picasso.get().load(imgstr).into(holder.myImgView)
     }
 
     // total number of rows

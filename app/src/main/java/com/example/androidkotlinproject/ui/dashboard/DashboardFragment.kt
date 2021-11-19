@@ -1,18 +1,18 @@
 package com.example.androidkotlinproject.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidkotlinproject.ui.RecyclerView.CustomAdapter
 import com.example.androidkotlinproject.databinding.FragmentDashboardBinding
-import com.example.androidkotlinproject.ui.RecyclerView.ContactsAdapter
 
 class DashboardFragment : Fragment() {
 
@@ -39,7 +39,10 @@ class DashboardFragment : Fragment() {
             var recyclerView = binding.rvcharacters
             recyclerView.layoutManager = LinearLayoutManager(activity?.applicationContext)
             val adapter = CustomAdapter(it) {
-                Log.d("klm",it.name)
+                val intent = Intent(activity, DetailMarvelCard::class.java).apply {
+                     putExtra(EXTRA_MESSAGE, it.id.toString())
+                }
+                startActivity(intent)
             }
 
 

@@ -18,5 +18,13 @@ object MarvelRepository {
 
         return result
     }
+    suspend fun fetchMarvelCharacterBYIDCoroutine(id : Int): MarvelCharacter {
+
+        val apiManager = APIManager()
+
+        var result = apiManager.marvelAPIByID(id)
+
+        return result
+    }
 
 }
