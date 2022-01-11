@@ -47,14 +47,16 @@ class FavFragment : Fragment() {
             var listVarCard = mutableListOf<MarvelCharacter>()
             it.data.results.forEach{
                 if(listFav.contains(it.id.toString())) {
+                    //garder que les favoris
                     listVarCard.add(it)
-                    Log.d("nathan","trouvé")
-                }else
-                    Log.d("nathan","PAS trouvé")
 
+                }
             }
+            //remplacer la liste de marvelCharacter à afficher
             it.data.results = listVarCard
+
             var recyclerView = binding.favrecycler
+
             recyclerView.layoutManager = LinearLayoutManager(activity?.applicationContext)
             val adapter = CustomAdapter(it) { marvelCharacter,id ->
                 if(marvelCharacter != null){
@@ -63,11 +65,19 @@ class FavFragment : Fragment() {
                     }
                     startActivity(intent)
                 }else if(id!=null){
+                    val prefs = Prefs(requireContext())
+                    if (prefs != null) {
+                        listFav = prefs.myStringArray.toMutableList()
+                        listFav.remove(id)
+                        prefs.myStringArray = listFav.toTypedArray()
 
+                    }
 
                 }
             }
+
             recyclerView.adapter = adapter
+
 
         })
 
