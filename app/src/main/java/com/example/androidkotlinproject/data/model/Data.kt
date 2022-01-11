@@ -9,5 +9,5 @@ data class Data(
     @SerializedName("total") val total : Int,
     @SerializedName("count") val count : Int,
 
-    @SerializedName("results") val results: List<MarvelCharacter>
+    @SerializedName("results") var results: List<MarvelCharacter>
 )

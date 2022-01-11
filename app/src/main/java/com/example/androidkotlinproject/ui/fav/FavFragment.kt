@@ -1,6 +1,9 @@
 package com.example.androidkotlinproject.ui.fav
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.AlarmClock
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +11,13 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidkotlinproject.data.prefs.Prefs
 import com.example.androidkotlinproject.databinding.FragmentNotificationsBinding
+import com.example.androidkotlinproject.ui.RecyclerView.CustomAdapter
+import com.example.androidkotlinproject.ui.marvel.DetailMarvelCard
 import com.example.androidkotlinproject.ui.marvel.MarvelViewModel
+import fr.iem.model.MarvelCharacter
 
 class FavFragment : Fragment() {
 
@@ -21,6 +28,7 @@ class FavFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private var listFav : MutableList<String> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,8 +40,36 @@ class FavFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
+        favViewModel.recyclerLiveData().observe(viewLifecycleOwner, Observer {
 
+            val prefs = Prefs(requireContext())
+            listFav = prefs.myStringArray.toMutableList()
+            var listVarCard = mutableListOf<MarvelCharacter>()
+            it.data.results.forEach{
+                if(listFav.contains(it.id.toString())) {
+                    listVarCard.add(it)
+                    Log.d("nathan","trouvé")
+                }else
+                    Log.d("nathan","PAS trouvé")
+
+            }
+            it.data.results = listVarCard
+            var recyclerView = binding.favrecycler
+            recyclerView.layoutManager = LinearLayoutManager(activity?.applicationContext)
+            val adapter = CustomAdapter(it) { marvelCharacter,id ->
+                if(marvelCharacter != null){
+                    val intent = Intent(activity, DetailMarvelCard::class.java).apply {
+                        putExtra(AlarmClock.EXTRA_MESSAGE, marvelCharacter.id.toString())
+                    }
+                    startActivity(intent)
+                }else if(id!=null){
+
+
+                }
+            }
+            recyclerView.adapter = adapter
+
+        })
 
         return root
     }

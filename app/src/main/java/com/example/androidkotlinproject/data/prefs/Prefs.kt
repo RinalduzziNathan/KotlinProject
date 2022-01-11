@@ -31,6 +31,7 @@ class Prefs(context: Context) {
     var myStringArray: Array<String>
         get() = sharedPrefs.getStringSet(KEY_MY_ARRAY, emptySet())?.toTypedArray()?: emptyArray()
         set(value) = sharedPrefs.edit { putStringSet(KEY_MY_ARRAY, value.toSet()) }
+
     var myObject: MyObject?
         get() {
             val jsonString = sharedPrefs.getString(KEY_USER_DATA, null) ?: return null

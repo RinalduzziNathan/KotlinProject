@@ -23,8 +23,7 @@ class PushFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-
-    override fun onCreateView(
+   override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,9 +47,13 @@ class PushFragment : Fragment() {
         btn.setOnClickListener {
             val prefs = context?.let { it1 -> Prefs(it1) }
             if (prefs != null) {
-                //prefs.myString = "voici mon shared pref"
 
-                textView.text = prefs.myString
+                prefs.myStringArray.forEach {
+                textView.text = textView.text.toString() +" et "+ "$it"
+
+                }
+
+
             }
         }
         return root

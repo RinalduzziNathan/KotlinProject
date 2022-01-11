@@ -23,6 +23,7 @@ class MarvelFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private var listFav : MutableList<String> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,7 +50,9 @@ class MarvelFragment : Fragment() {
                 }else if(id!=null){
                         val prefs = Prefs(requireContext())
                         if (prefs != null) {
-                         prefs.myString  = id
+                            listFav = prefs.myStringArray.toMutableList()
+                            listFav.add(id)
+                         prefs.myStringArray = listFav.toTypedArray()
                         }
                     }
                 }
