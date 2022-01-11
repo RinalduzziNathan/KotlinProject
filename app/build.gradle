@@ -37,6 +37,65 @@ android {
     buildFeatures {
         viewBinding true
     }
+    flavorDimensions "environment"
+    productFlavors {
+        development {
+            dimension "environment"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix '-dev'
+            ext {
+                wsUrl = "https://b4e98b3d-d208-4ce0-994f-d1e23f4778d3.mock.pstmn.io/"
+                apiKey = ""
+            }
+        }
+
+        recette {
+            dimension "environment"
+            applicationIdSuffix = ".recette"
+            versionNameSuffix '-recette'
+            ext {
+                wsUrl = "https://pokeapi.co/api/v2/"
+                apiKey = ""
+            }
+        }
+
+        preprod {
+            dimension "environment"
+            applicationIdSuffix = ".preprod"
+            versionNameSuffix "-preprod"
+            ext {
+                wsUrl = ""
+                apiKey = ""
+            }
+        }
+
+        production {
+            dimension "environment"
+            ext {
+                wsUrl = ""
+                apiKey = ""
+            }
+        }
+
+        applicationVariants.all { variant ->
+
+            def dimensions = variant.productFlavors
+            def environment = dimensions[0]
+
+            def wsUrl = environment.ext.wsUrl
+            def apiKey = environment.ext.apiKey
+            variant.buildConfigField "String", "WSUrl", "\"$wsUrl\""
+            variant.buildConfigField "String", "API_KEY", "\"$apiKey\""
+        }
+    }
+
+}
+ext {
+    kotlinVersion = '1.5.20'
+    okhttp = '4.2.2'
+    picasso = '2.71828'
+    retrofit = '2.6.2'
+    timber = '4.7.1'
 }
 
 dependencies {
