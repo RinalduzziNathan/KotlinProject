@@ -16,9 +16,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="130dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="42dp"
             android:layout_marginEnd="130dp"
             android:layout_marginBottom="27dp"
+
             android:rotation="0"
             android:rotationX="0"
             android:rotationY="0"
@@ -29,13 +30,21 @@
         <TextView
             android:id="@+id/nameDetail"
             android:layout_width="match_parent"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="name hero"
             android:scaleX="2.2"
             android:scaleY="2.2"
             android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/descriptionDetail"
+            android:layout_width="match_parent"
+            android:layout_height="279dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="i come from ....." />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

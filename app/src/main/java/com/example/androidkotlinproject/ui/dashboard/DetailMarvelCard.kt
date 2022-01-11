@@ -22,14 +22,14 @@ class DetailMarvelCard : AppCompatActivity() {
 
         val textViewName = findViewById<TextView>(R.id.nameDetail)
         val imageViewDetail = findViewById<ImageView>(R.id.imageDetail)
-
+        val textViewDescription = findViewById<TextView>(R.id.descriptionDetail)
         detailMarvelCardViewModel = ViewModelProvider(this).get(DetailMarvelCardViewModel::class.java)
 
         if (message != null) {
              detailMarvelCardViewModel.detailLiveData(message.toInt()).observe(this,
                 Observer {
                     textViewName.text = it.name
-
+                    textViewDescription.text = it.description
                     Picasso.get().load(it.thumbnail.path.replace("http","https")+"."+it.thumbnail.extension).into(imageViewDetail)
                 })
         }

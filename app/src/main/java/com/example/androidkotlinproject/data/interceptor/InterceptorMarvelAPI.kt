@@ -1,5 +1,6 @@
 package com.example.androidkotlinproject.data.interceptor
 
+import android.util.Log
 import com.example.androidkotlinproject.BuildConfig
 import com.example.androidkotlinproject.data.manager.HashMd5Manager
 import com.example.androidkotlinproject.data.manager.ResourceManager

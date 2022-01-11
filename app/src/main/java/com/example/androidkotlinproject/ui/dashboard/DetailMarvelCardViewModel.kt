@@ -1,6 +1,5 @@
 package com.example.androidkotlinproject.ui.dashboard
 
-import MarvelResponse
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,7 +16,7 @@ class DetailMarvelCardViewModel : ViewModel() {
         val data = MutableLiveData<MarvelCharacter>()
 
         viewModelScope.launch {
-            data.postValue(MarvelRepository.fetchMarvelCharacterBYIDCoroutine(id))
+            data.postValue(MarvelRepository.fetchMarvelCharacterByIdCoroutine(id))
         }
 
         return data

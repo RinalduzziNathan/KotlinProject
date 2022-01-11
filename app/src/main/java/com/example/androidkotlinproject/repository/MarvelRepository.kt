@@ -18,7 +18,7 @@ object MarvelRepository {
 
         return result
     }
-    suspend fun fetchMarvelCharacterBYIDCoroutine(id : Int): MarvelCharacter {
+    suspend fun fetchMarvelCharacterByIdCoroutine(id : Int): MarvelCharacter {
 
         val apiManager = APIManager()
 

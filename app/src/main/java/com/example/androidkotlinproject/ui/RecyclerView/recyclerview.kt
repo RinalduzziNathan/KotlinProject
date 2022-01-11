@@ -35,7 +35,7 @@ class MyRecyclerViewAdapter internal constructor(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val name = mData[position]
         val status = mData2[position]
-        val imgstr = mDataImageString[position]
+
         holder.myTextView.text = name
         holder.myTextView2.text = status
     }
