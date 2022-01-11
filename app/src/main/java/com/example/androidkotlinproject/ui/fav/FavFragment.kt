@@ -10,10 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.androidkotlinproject.data.prefs.Prefs
 import com.example.androidkotlinproject.databinding.FragmentNotificationsBinding
+import com.example.androidkotlinproject.ui.marvel.MarvelViewModel
 
 class FavFragment : Fragment() {
 
-    private lateinit var favViewModel: FavViewModel
+    private lateinit var favViewModel: MarvelViewModel
     private var _binding: FragmentNotificationsBinding? = null
 
     // This property is only valid between onCreateView and
@@ -26,19 +27,12 @@ class FavFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         favViewModel =
-            ViewModelProvider(this).get(FavViewModel::class.java)
+            ViewModelProvider(requireActivity()).get(MarvelViewModel::class.java)
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        favViewModel.text.observe(viewLifecycleOwner, Observer {
-            val prefs = context?.let { it1 -> Prefs(it1) }
-            if (prefs != null) {
-                textView.text  = prefs.myString
-            }
-           // textView.text = it
-        })
 
 
         return root

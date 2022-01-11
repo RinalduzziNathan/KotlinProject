@@ -1,17 +1,21 @@
 package com.example.androidkotlinproject.ui.RecyclerView
 
 import MarvelResponse
+import android.app.Activity
+import android.app.Application
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidkotlinproject.R
+import com.example.androidkotlinproject.data.prefs.Prefs
 import com.squareup.picasso.Picasso
 import fr.iem.model.MarvelCharacter
 
-class CustomAdapter (private val dataSet: MarvelResponse, var clickCallBack : (marvelCharacter : MarvelCharacter) -> Unit):
+class CustomAdapter (private val dataSet: MarvelResponse, var clickCallBack : (marvelCharacter : MarvelCharacter?, id : String?) -> Unit):
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
 
@@ -23,9 +27,11 @@ class CustomAdapter (private val dataSet: MarvelResponse, var clickCallBack : (m
         val textViewName: TextView = view.findViewById(R.id.tvCharactername)
         val img : ImageView = view.findViewById(R.id.image)
         val textViewStatus: TextView = view.findViewById(R.id.tvCharacterstatus)
-        init {
+        val btnFav: Button = view.findViewById(R.id.buttonfav)
+        init{
 
         }
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -42,7 +48,7 @@ class CustomAdapter (private val dataSet: MarvelResponse, var clickCallBack : (m
 
 
         viewHolder.itemView.setOnClickListener {
-           clickCallBack(dataSet.data.results[position])
+           clickCallBack(dataSet.data.results[position],null)
         }
         viewHolder.textViewName.text = dataSet.data.results[position].name
         viewHolder.textViewStatus.text = dataSet.data.results[position].modified
@@ -50,6 +56,13 @@ class CustomAdapter (private val dataSet: MarvelResponse, var clickCallBack : (m
 
         if (dataSet != null) {
             Picasso.get().load(path.replace("http","https")+"."+dataSet.data.results[position].thumbnail.extension).into(viewHolder.img)
+            viewHolder.btnFav.setOnClickListener{
+                val prefs = Prefs(viewHolder.itemView.context)
+                if (prefs != null) {
+                 //   prefs.myString  = dataSet.data.results[position].id.toString()
+                }
+                clickCallBack(null,dataSet.data.results[position].id.toString())
+            }
         }
     }
 

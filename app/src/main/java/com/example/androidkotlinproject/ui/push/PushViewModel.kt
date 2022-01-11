@@ -9,20 +9,20 @@ class PushViewModel : ViewModel() {
 
 
    var name = liveData {
-        val apiManager = APIManager()
-       emit(apiManager.marvelAPIByID(1017100).name)
+
+       emit(APIManager.marvelAPIByID(1017100).name)
     }
     var description = liveData {
-        val apiManager = APIManager()
-        emit(apiManager.marvelAPIByID(1017100).description)
+
+        emit(APIManager.marvelAPIByID(1017100).description)
     }
 
     fun getName() : String{
         var name = "";
 
         viewModelScope.launch {
-            val apiManager = APIManager()
-             name = apiManager.marvelAPIByID(1017100).name
+
+             name = APIManager.marvelAPIByID(1017100).name
         }
         return name
     }

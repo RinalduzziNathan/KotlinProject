@@ -14,22 +14,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.lang.IllegalStateException
 
 
-class APIManager {
+object  APIManager {
+    //create an instance of our interceptor
+    val interceptor = InterceptorMarvelAPI()
+    val okHttpClient = OkHttpClient().newBuilder()
+        .addInterceptor(interceptor)
+        .build()
+
+    // link the interceptor with retrofit instance
+    val retrofit =  Retrofit.Builder()
+        .addConverterFactory(GsonConverterFactory.create(Gson()))
+        .client(okHttpClient)
+        .baseUrl(BASE_URL)
+        .build()
+        .create(MarvelAPI::class.java)
+
     suspend fun marvelAPIByID(id : Int) : MarvelCharacter {
-
-        //create an instance of our interceptor
-        val interceptor = InterceptorMarvelAPI()
-        val okHttpClient = OkHttpClient().newBuilder()
-            .addInterceptor(interceptor)
-            .build()
-
-        // link the interceptor with retrofit instance
-        val retrofit =  Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create(Gson()))
-            .client(okHttpClient)
-            .baseUrl(BASE_URL)
-            .build()
-            .create(MarvelAPI::class.java)
 
         val response = retrofit.getCharacterByID(
             characterID = id,
@@ -44,19 +44,7 @@ class APIManager {
     }
     suspend fun marvelAPICharacters() : MarvelResponse {
 
-        //create an instance of our interceptor
-        val interceptor = InterceptorMarvelAPI()
-        val okHttpClient = OkHttpClient().newBuilder()
-            .addInterceptor(interceptor)
-            .build()
 
-        // link the interceptor with retrofit instance
-        val retrofit =  Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create(Gson()))
-            .client(okHttpClient)
-            .baseUrl(BASE_URL)
-            .build()
-            .create(MarvelAPI::class.java)
 
         val response = retrofit.getCharacters()
 
@@ -68,4 +56,6 @@ class APIManager {
 
         return ironMan
     }
+
+
 }

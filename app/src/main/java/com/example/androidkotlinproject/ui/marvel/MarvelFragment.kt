@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.androidkotlinproject.data.prefs.Prefs
 import com.example.androidkotlinproject.ui.RecyclerView.CustomAdapter
 import com.example.androidkotlinproject.databinding.FragmentDashboardBinding
 
@@ -27,8 +28,10 @@ class MarvelFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+
         marvelViewModel =
-            ViewModelProvider(this).get(MarvelViewModel::class.java)
+            ViewModelProvider(requireActivity()).get(MarvelViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -37,14 +40,19 @@ class MarvelFragment : Fragment() {
         marvelViewModel.recyclerLiveData().observe(viewLifecycleOwner, Observer {
             var recyclerView = binding.rvcharacters
             recyclerView.layoutManager = LinearLayoutManager(activity?.applicationContext)
-            val adapter = CustomAdapter(it) {
-                val intent = Intent(activity, DetailMarvelCard::class.java).apply {
-                     putExtra(EXTRA_MESSAGE, it.id.toString())
+            val adapter = CustomAdapter(it) { marvelCharacter,id ->
+                if(marvelCharacter != null){
+                    val intent = Intent(activity, DetailMarvelCard::class.java).apply {
+                        putExtra(EXTRA_MESSAGE, marvelCharacter.id.toString())
+                    }
+                    startActivity(intent)
+                }else if(id!=null){
+                        val prefs = Prefs(requireContext())
+                        if (prefs != null) {
+                         prefs.myString  = id
+                        }
+                    }
                 }
-                startActivity(intent)
-            }
-
-
             recyclerView.adapter = adapter
 
         })
