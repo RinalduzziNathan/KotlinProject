@@ -1,4 +1,4 @@
-package com.example.androidkotlinproject.ui.dashboard
+package com.example.androidkotlinproject.ui.marvel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.example.androidkotlinproject.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:name="com.example.androidkotlinproject.ui.push.PushFragment"
+        android:label="Push"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.androidkotlinproject.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:name="com.example.androidkotlinproject.ui.marvel.MarvelFragment"
+        android:label="Marvel"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.example.androidkotlinproject.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:name="com.example.androidkotlinproject.ui.fav.FavFragment"
+        android:label="Fav"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

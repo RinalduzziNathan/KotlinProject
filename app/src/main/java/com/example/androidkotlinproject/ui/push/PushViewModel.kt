@@ -1,11 +1,11 @@
-package com.example.androidkotlinproject.ui.home
+package com.example.androidkotlinproject.ui.push
 
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.androidkotlinproject.data.manager.APIManager
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
+class PushViewModel : ViewModel() {
 
 
    var name = liveData {

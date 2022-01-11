@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidKotlinProject">
         <activity
-            android:name=".ui.dashboard.DetailMarvelCard"
+            android:name=".ui.marvel.DetailMarvelCard"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

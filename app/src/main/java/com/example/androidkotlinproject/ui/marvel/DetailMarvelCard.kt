@@ -1,4 +1,4 @@
-package com.example.androidkotlinproject.ui.dashboard
+package com.example.androidkotlinproject.ui.marvel
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

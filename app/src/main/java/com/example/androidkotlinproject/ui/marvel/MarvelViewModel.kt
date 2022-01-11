@@ -1,14 +1,13 @@
-package com.example.androidkotlinproject.ui.dashboard
+package com.example.androidkotlinproject.ui.marvel
 
 import MarvelResponse
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidkotlinproject.repository.MarvelRepository
-import fr.iem.model.MarvelCharacter
 import kotlinx.coroutines.launch
 
-class DashboardViewModel : ViewModel() {
+class MarvelViewModel : ViewModel() {
 
 
     fun recyclerLiveData() : MutableLiveData<MarvelResponse> {

@@ -1,9 +1,8 @@
-package com.example.androidkotlinproject.ui.dashboard
+package com.example.androidkotlinproject.ui.marvel
 
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidkotlinproject.ui.RecyclerView.CustomAdapter
 import com.example.androidkotlinproject.databinding.FragmentDashboardBinding
 
-class DashboardFragment : Fragment() {
+class MarvelFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var marvelViewModel: MarvelViewModel
     private var _binding: FragmentDashboardBinding? = null
 
     // This property is only valid between onCreateView and
@@ -28,14 +27,14 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
+        marvelViewModel =
+            ViewModelProvider(this).get(MarvelViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 
-        dashboardViewModel.recyclerLiveData().observe(viewLifecycleOwner, Observer {
+        marvelViewModel.recyclerLiveData().observe(viewLifecycleOwner, Observer {
             var recyclerView = binding.rvcharacters
             recyclerView.layoutManager = LinearLayoutManager(activity?.applicationContext)
             val adapter = CustomAdapter(it) {

@@ -1,4 +1,4 @@
-package com.example.androidkotlinproject.ui.notifications
+package com.example.androidkotlinproject.ui.fav
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.androidkotlinproject.R
 import com.example.androidkotlinproject.databinding.FragmentNotificationsBinding
 
-class NotificationsFragment : Fragment() {
+class FavFragment : Fragment() {
 
-    private lateinit var notificationsViewModel: NotificationsViewModel
+    private lateinit var favViewModel: FavViewModel
     private var _binding: FragmentNotificationsBinding? = null
 
     // This property is only valid between onCreateView and
@@ -25,14 +24,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        favViewModel =
+            ViewModelProvider(this).get(FavViewModel::class.java)
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner, Observer {
+        favViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
