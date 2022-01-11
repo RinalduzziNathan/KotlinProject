@@ -27,8 +27,5 @@ class PushViewModel : ViewModel() {
         return name
     }
 
-    fun deleteText(){
-       Log.d("nathan","buttonpushed")
 
-    }
 }

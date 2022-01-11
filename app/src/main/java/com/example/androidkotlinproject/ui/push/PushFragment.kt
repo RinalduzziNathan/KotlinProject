@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.androidkotlinproject.R
+import com.example.androidkotlinproject.data.prefs.Prefs
 import com.example.androidkotlinproject.databinding.FragmentHomeBinding
 
 class PushFragment : Fragment() {
@@ -45,12 +46,11 @@ class PushFragment : Fragment() {
         })
         val btn : Button = binding.push
         btn.setOnClickListener {
-            pushViewModel.deleteText()
-            textView.text = textView.text.toString()+ " pushed "
-            val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-            with (sharedPref.edit()) {
-                putInt(getString(R.string.shared_test), 42)
-                apply()
+            val prefs = context?.let { it1 -> Prefs(it1) }
+            if (prefs != null) {
+                //prefs.myString = "voici mon shared pref"
+
+                textView.text = prefs.myString
             }
         }
         return root

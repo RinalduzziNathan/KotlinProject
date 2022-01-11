@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.androidkotlinproject.data.prefs.Prefs
 import com.example.androidkotlinproject.databinding.FragmentNotificationsBinding
 
 class FavFragment : Fragment() {
@@ -32,8 +33,14 @@ class FavFragment : Fragment() {
 
         val textView: TextView = binding.textNotifications
         favViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
+            val prefs = context?.let { it1 -> Prefs(it1) }
+            if (prefs != null) {
+                textView.text  = prefs.myString
+            }
+           // textView.text = it
         })
+
+
         return root
     }
 
