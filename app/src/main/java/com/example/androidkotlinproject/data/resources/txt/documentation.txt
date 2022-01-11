@@ -1,3 +1,0 @@
-You need help, This is the documentation.
-use --json or -j to deserialize the json,
-use --md5 or -h followed by a parameter to get the parameter in md5 hash, like -h "Hello World"
