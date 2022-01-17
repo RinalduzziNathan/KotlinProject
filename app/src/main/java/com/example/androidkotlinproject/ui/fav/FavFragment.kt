@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.androidkotlinproject.data.prefs.Prefs
 import com.example.androidkotlinproject.databinding.FragmentNotificationsBinding
 import com.example.androidkotlinproject.ui.RecyclerView.CustomAdapter
@@ -23,7 +24,8 @@ class FavFragment : Fragment() {
 
     private lateinit var favViewModel: MarvelViewModel
     private var _binding: FragmentNotificationsBinding? = null
-
+    private lateinit var adapter : CustomAdapter
+    var recyclerView : RecyclerView? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -54,11 +56,10 @@ class FavFragment : Fragment() {
             }
             //remplacer la liste de marvelCharacter à afficher
             it.data.results = listVarCard
+             recyclerView = binding.favrecycler
 
-            var recyclerView = binding.favrecycler
-
-            recyclerView.layoutManager = LinearLayoutManager(activity?.applicationContext)
-            val adapter = CustomAdapter(it) { marvelCharacter,id ->
+            recyclerView!!.layoutManager = LinearLayoutManager(activity?.applicationContext)
+             adapter = CustomAdapter(it) { marvelCharacter,id ->
                 if(marvelCharacter != null){
                     val intent = Intent(activity, DetailMarvelCard::class.java).apply {
                         putExtra(AlarmClock.EXTRA_MESSAGE, marvelCharacter.id.toString())
@@ -71,19 +72,25 @@ class FavFragment : Fragment() {
                         listFav.remove(id)
                         prefs.myStringArray = listFav.toTypedArray()
 
+
                     }
 
                 }
             }
 
-            recyclerView.adapter = adapter
+            recyclerView!!.adapter = adapter
 
 
         })
 
         return root
     }
-
+    override fun onResume() {
+        super.onResume()
+        if(recyclerView != null ){
+            recyclerView!!.adapter?.notifyDataSetChanged()
+        }
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

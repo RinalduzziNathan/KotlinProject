@@ -45,6 +45,12 @@
             android:layout_marginTop="5dp"
             android:gravity="center"
             android:text="i come from ....." />
+
+        <Button
+            android:id="@+id/buttonFavDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Favori" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

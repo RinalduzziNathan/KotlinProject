@@ -62,12 +62,15 @@ class CustomAdapter (private val dataSet: MarvelResponse, var clickCallBack : (m
         var listFav = prefs.myStringArray.toMutableList()
         dataSet.data.results.forEach{
             if(listFav.contains(it.id.toString())){
-                Log.d("nathan","YES IT IS")
-                viewHolder.btnFav.text = "unfav"
+                if(dataSet.data.results[position].id==it.id){
+                    viewHolder.btnFav.text = "unfav"
+                }
             }else
-                viewHolder.btnFav.text = "fav"
-        }
+                if(dataSet.data.results[position].id==it.id){
+                    viewHolder.btnFav.text = "fav"
+                }
 
+        }
         var path : String = dataSet.data.results[position].thumbnail.path
 
         if (dataSet != null) {
@@ -76,6 +79,8 @@ class CustomAdapter (private val dataSet: MarvelResponse, var clickCallBack : (m
             viewHolder.btnFav.setOnClickListener{
 
                 clickCallBack(null,dataSet.data.results[position].id.toString())
+
+                this.notifyDataSetChanged()
             }
         }
     }

@@ -3,12 +3,16 @@ package com.example.androidkotlinproject.ui.marvel
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.androidkotlinproject.R
+import com.example.androidkotlinproject.data.prefs.Prefs
 import com.squareup.picasso.Picasso
+import fr.iem.model.MarvelCharacter
 
 class DetailMarvelCard : AppCompatActivity() {
 
@@ -31,8 +35,34 @@ class DetailMarvelCard : AppCompatActivity() {
                     textViewName.text = it.name
                     textViewDescription.text = it.description
                     Picasso.get().load(it.thumbnail.path.replace("http","https")+"."+it.thumbnail.extension).into(imageViewDetail)
+                    val buttonFav = findViewById<Button>(R.id.buttonFavDetails)
+                    val prefs = Prefs(this.applicationContext)
+
+                    var listVarCard = mutableListOf<MarvelCharacter>()
+                    var listFav = prefs.myStringArray.toMutableList()
+
+                    if (listFav.contains(it.id.toString())) {
+                        buttonFav.text = "Retirer Favoris"
+                    } else{
+                        buttonFav.text = "Ajouter Favoris"
+                    }
+                    val marvelChar = it
+                    buttonFav.setOnClickListener() {
+                        listFav = prefs.myStringArray.toMutableList()
+                        if(listFav.contains(marvelChar.id.toString())){
+                            listFav.remove(marvelChar.id.toString())
+                            buttonFav.text = "Ajouter Favoris"
+                        }else{
+                            listFav.add(marvelChar.id.toString())
+                            buttonFav.text = "Retirer Favoris"
+                        }
+                        prefs.myStringArray = listFav.toTypedArray()
+                    }
                 })
         }
+
+
+
     }
 
 
