@@ -3,11 +3,9 @@ package com.example.androidkotlinproject.ui.fav
 import android.content.Intent
 import android.os.Bundle
 import android.provider.AlarmClock
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,13 +22,14 @@ class FavFragment : Fragment() {
 
     private lateinit var favViewModel: MarvelViewModel
     private var _binding: FragmentNotificationsBinding? = null
-    private lateinit var adapter : CustomAdapter
-    var recyclerView : RecyclerView? = null
+    private lateinit var adapter: CustomAdapter
+    var recyclerView: RecyclerView? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private var listFav : MutableList<String> = mutableListOf()
+    private var listFav: MutableList<String> = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,8 +46,8 @@ class FavFragment : Fragment() {
             val prefs = Prefs(requireContext())
             listFav = prefs.myStringArray.toMutableList()
             var listVarCard = mutableListOf<MarvelCharacter>()
-            it.data.results.forEach{
-                if(listFav.contains(it.id.toString())) {
+            it.data.results.forEach {
+                if (listFav.contains(it.id.toString())) {
                     //garder que les favoris
                     listVarCard.add(it)
 
@@ -56,24 +55,24 @@ class FavFragment : Fragment() {
             }
             //remplacer la liste de marvelCharacter à afficher
             it.data.results = listVarCard
-             recyclerView = binding.favrecycler
+            recyclerView = binding.favrecycler
 
-            recyclerView!!.layoutManager = LinearLayoutManager(activity?.applicationContext)
-             adapter = CustomAdapter(it) { marvelCharacter,id ->
-                if(marvelCharacter != null){
+            recyclerView?.layoutManager = LinearLayoutManager(activity?.applicationContext)
+            adapter = CustomAdapter(it) { marvelCharacter, id ->
+                if (marvelCharacter != null) {
                     val intent = Intent(activity, DetailMarvelCard::class.java).apply {
                         putExtra(AlarmClock.EXTRA_MESSAGE, marvelCharacter.id.toString())
                     }
                     startActivity(intent)
-                }else if(id!=null){
+                } else if (id != null) {
                     val prefs = Prefs(requireContext())
-                    if (prefs != null) {
+
                         listFav = prefs.myStringArray.toMutableList()
                         listFav.remove(id)
                         prefs.myStringArray = listFav.toTypedArray()
 
 
-                    }
+
 
                 }
             }
@@ -85,12 +84,14 @@ class FavFragment : Fragment() {
 
         return root
     }
+
     override fun onResume() {
         super.onResume()
-        if(recyclerView != null ){
-            recyclerView!!.adapter?.notifyDataSetChanged()
+        if (recyclerView != null) {
+            recyclerView?.adapter?.notifyDataSetChanged()
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

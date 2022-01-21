@@ -71,7 +71,7 @@ class MarvelFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         if(recyclerView != null ){
-            recyclerView!!.adapter?.notifyDataSetChanged()
+            recyclerView?.adapter?.notifyDataSetChanged()
         }
     }
     override fun onDestroyView() {

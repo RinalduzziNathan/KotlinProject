@@ -16,6 +16,7 @@ class MarvelViewModel : ViewModel() {
         val data = MutableLiveData<MarvelResponse>()
 
         viewModelScope.launch {
+
             data.postValue(MarvelRepository.fetchMarvelCharactersCoroutine())
         }
 
