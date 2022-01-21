@@ -1,6 +1,7 @@
 package com.example.androidkotlinproject
 
 import MarvelResponse
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -17,7 +18,8 @@ import com.google.gson.Gson
 import fr.iem.model.MarvelCharacter
 import java.io.File
 
-const val BASE_URL = "https:gateway.marvel.com:443"
+const val BASE_URL = BuildConfig.BaseURL
+   // "https:gateway.marvel.com:443"
 
 
 class MainActivity : AppCompatActivity() {

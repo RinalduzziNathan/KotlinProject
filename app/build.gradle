@@ -27,6 +27,8 @@ android {
         }
     }
 
+
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -37,8 +39,44 @@ android {
     buildFeatures {
         viewBinding true
     }
+    flavorDimensions "environment"
+    productFlavors {
+        mock {
+            dimension "environment"
+            applicationIdSuffix = ".dev"
+            versionNameSuffix '-dev'
+            ext {
+                BaseURL = "https://2c4ecb3e-f6a8-4fbe-8792-2401d8538e86.mock.pstmn.io"
+
+            }
+        }
+        marvel {
+            dimension "environment"
+            applicationIdSuffix = ".marvel"
+            versionNameSuffix '-marvel'
+            ext {
+                BaseURL =  "https:gateway.marvel.com:443"
+            }
+        }
+    }
+    applicationVariants.all { variant ->
+
+        def dimensions = variant.productFlavors
+        def environment = dimensions[0]
+
+        def wsUrl = environment.ext.BaseURL
+        variant.buildConfigField "String", "BaseURL", "\"$wsUrl\""
+
+    }
 }
 
+ext {
+    kotlinVersion = '1.5.20'
+    okhttp = '4.2.2'
+    picasso = '2.71828'
+    retrofit = '2.6.2'
+    timber = '4.7.1'
+}
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.3.2'
