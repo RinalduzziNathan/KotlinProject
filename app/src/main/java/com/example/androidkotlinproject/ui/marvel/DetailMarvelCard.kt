@@ -6,6 +6,7 @@ import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toolbar
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -29,11 +30,14 @@ class DetailMarvelCard : AppCompatActivity() {
         val textViewDescription = findViewById<TextView>(R.id.descriptionDetail)
         detailMarvelCardViewModel = ViewModelProvider(this).get(DetailMarvelCardViewModel::class.java)
 
+
         if (message != null) {
              detailMarvelCardViewModel.detailLiveData(message.toInt()).observe(this,
                 Observer {
+                    supportActionBar?.title = "Detail : "+it.name
                     textViewName.text = it.name
                     textViewDescription.text = it.description
+
                     Picasso.get().load(it.thumbnail.path.replace("http","https")+"."+it.thumbnail.extension).into(imageViewDetail)
                     val buttonFav = findViewById<Button>(R.id.buttonFavDetails)
                     val prefs = Prefs(this.applicationContext)
